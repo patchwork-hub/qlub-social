@@ -226,3 +226,16 @@ gem 'rubyzip', '~> 2.3'
 gem 'hcaptcha', '~> 7.1'
 
 gem 'mail', '~> 2.8'
+
+gem 'accounts', git: 'https://github.com/patchwork-hub/accounts', branch: 'qlub-accounts'
+gem 'content_filters', git: 'https://github.com/patchwork-hub/content_filters', branch: 'qlub-constent_filters'
+gem 'conversations', git: 'https://github.com/patchwork-hub/conversations', branch: 'qlub-conversations'
+gem 'posts', git: 'https://github.com/patchwork-hub/posts', branch: 'qlub-posts'
+
+# *** Add this alongside Post Gems ***
+# gem 'faraday-typhoeus', '~> 1.1'
+
+# gem 'accounts', path: '/Users/macbookpro/workplace/patchwork/accounts'
+# gem 'posts', path: '/Users/macbookpro/workplace/patchwork/posts'
+# gem 'conversations', path: '/Users/macbookpro/workplace/patchwork/conversations'
+# gem 'content_filters', path: '/Users/macbookpro/workplace/patchwork/content_filters'
