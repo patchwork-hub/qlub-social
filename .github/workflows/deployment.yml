@@ -7,12 +7,12 @@ on:
     branches:
       - deployment
 
-# env:
-#   WEB_DEFINITION: .task/qlub_web.json
-#   SIDEKIQ_DEFINITION: .task/qlub_sidekiq.json
-#   STREAMING_DEFINITION: .task/qlub_streaming.json
-#   REGISTRY: ${{ secrets.AWS_REGION }}.amazonaws.com
-#   REPOSITORY: ${{ secrets.REPOSITORY }}
+env:
+  WEB_DEFINITION: .task/qlub_web.json
+  SIDEKIQ_DEFINITION: .task/qlub_sidekiq.json
+  STREAMING_DEFINITION: .task/qlub_streaming.json
+  REGISTRY: ${{ secrets.AWS_REGION }}.amazonaws.com
+  REPOSITORY: ${{ secrets.REPOSITORY }}
 
 permissions:
   contents: read
@@ -191,81 +191,81 @@ jobs:
           
           echo "Successfully built and pushed: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-  # deploy-production:
-  #   name: Deploy to Production
-  #   runs-on: ubuntu-latest
-  #   needs: [build-web]
-  #   if: github.ref == 'refs/heads/production'
-  #   environment: production
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-web]
+    if: github.ref == 'refs/heads/deployment'
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Configure AWS credentials
-  #       uses: aws-actions/configure-aws-credentials@v4
-  #       with:
-  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #         aws-region: ${{ secrets.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-  #     - name: Login to Amazon ECR
-  #       id: login-ecr
-  #       uses: aws-actions/amazon-ecr-login@v2
-  #       with:
-  #         mask-password: 'true'
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: 'true'
 
-  #     - name: Update web service task definition
-  #       id: task-def-web
-  #       uses: aws-actions/amazon-ecs-render-task-definition@v1
-  #       with:
-  #         task-definition: ${{ env.WEB_DEFINITION }}
-  #         container-name: ${{ secrets.WEB_PRODUCTION_CONTAINER }}
-  #         image: ${{ secrets.WEB_PRODUCTION_IMAGE }}
+      - name: Update web service task definition
+        id: task-def-web
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.WEB_DEFINITION }}
+          container-name: ${{ secrets.WEB_PRODUCTION_CONTAINER }}
+          image: ${{ secrets.WEB_PRODUCTION_IMAGE }}
 
-  #     - name: Deploy web service
-  #       uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-  #       with:
-  #         task-definition: ${{ steps.task-def-web.outputs.task-definition }}
-  #         service: ${{ secrets.WEB_PRODUCTION_SERVICE_NAME }}
-  #         cluster: ${{ secrets.CLUSTER_PRODUCTION }}
-  #         wait-for-service-stability: false
+      - name: Deploy web service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def-web.outputs.task-definition }}
+          service: ${{ secrets.WEB_PRODUCTION_SERVICE_NAME }}
+          cluster: ${{ secrets.CLUSTER_PRODUCTION }}
+          wait-for-service-stability: false
 
-  #     - name: Update Sidekiq task definition
-  #       id: task-def-sidekiq
-  #       uses: aws-actions/amazon-ecs-render-task-definition@v1
-  #       with:
-  #         task-definition: ${{ env.SIDEKIQ_DEFINITION }}
-  #         container-name: ${{ secrets.SIDEKIQ_PRODUCTION_CONTAINER_NAME }}
-  #         image: ${{ secrets.WEB_PRODUCTION_IMAGE }}
+      - name: Update Sidekiq task definition
+        id: task-def-sidekiq
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.SIDEKIQ_DEFINITION }}
+          container-name: ${{ secrets.SIDEKIQ_PRODUCTION_CONTAINER_NAME }}
+          image: ${{ secrets.WEB_PRODUCTION_IMAGE }}
 
-  #     - name: Deploy Sidekiq service
-  #       uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-  #       with:
-  #         task-definition: ${{ steps.task-def-sidekiq.outputs.task-definition }}
-  #         service: ${{ secrets.SIDEKIQ_PRODUCTION_SERVICE_NAME }}
-  #         cluster: ${{ secrets.CLUSTER_PRODUCTION }}
-  #         wait-for-service-stability: false
+      - name: Deploy Sidekiq service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def-sidekiq.outputs.task-definition }}
+          service: ${{ secrets.SIDEKIQ_PRODUCTION_SERVICE_NAME }}
+          cluster: ${{ secrets.CLUSTER_PRODUCTION }}
+          wait-for-service-stability: false
 
-  #     - name: Update Streaming task definition
-  #       id: task-def-streaming
-  #       uses: aws-actions/amazon-ecs-render-task-definition@v1
-  #       with:
-  #         task-definition: ${{ env.STREAMING_DEFINITION }}
-  #         container-name: ${{ secrets.STREAMING_PRODUCTION_CONTAINER_NAME }}
-  #         image: ${{ secrets.STREAMING_PRODUCTION_IMAGE }}
+      - name: Update Streaming task definition
+        id: task-def-streaming
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.STREAMING_DEFINITION }}
+          container-name: ${{ secrets.STREAMING_PRODUCTION_CONTAINER_NAME }}
+          image: ${{ secrets.STREAMING_PRODUCTION_IMAGE }}
 
-  #     - name: Deploy Streaming service
-  #       uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-  #       with:
-  #         task-definition: ${{ steps.task-def-streaming.outputs.task-definition }}
-  #         service: ${{ secrets.STREAMING_PRODUCTION_SERVICE_NAME }}
-  #         cluster: ${{ secrets.CLUSTER_PRODUCTION }}
-  #         wait-for-service-stability: false
+      - name: Deploy Streaming service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def-streaming.outputs.task-definition }}
+          service: ${{ secrets.STREAMING_PRODUCTION_SERVICE_NAME }}
+          cluster: ${{ secrets.CLUSTER_PRODUCTION }}
+          wait-for-service-stability: false
 
-  #     - name: Deployment complete
-  #       run: |
-  #         echo "Deployment to production environment completed successfully!"
-  #         echo "Web service: ${{ secrets.WEB_PRODUCTION_SERVICE_NAME }}"
-  #         echo "Sidekiq service: ${{ secrets.SIDEKIQ_PRODUCTION_SERVICE_NAME }}"
-  #         echo "Streaming service: ${{ secrets.STREAMING_PRODUCTION_SERVICE_NAME }}"
-  #         echo "Cluster: ${{ secrets.CLUSTER_PRODUCTION }}"
+      - name: Deployment complete
+        run: |
+          echo "Deployment to production environment completed successfully!"
+          echo "Web service: ${{ secrets.WEB_PRODUCTION_SERVICE_NAME }}"
+          echo "Sidekiq service: ${{ secrets.SIDEKIQ_PRODUCTION_SERVICE_NAME }}"
+          echo "Streaming service: ${{ secrets.STREAMING_PRODUCTION_SERVICE_NAME }}"
+          echo "Cluster: ${{ secrets.CLUSTER_PRODUCTION }}"
