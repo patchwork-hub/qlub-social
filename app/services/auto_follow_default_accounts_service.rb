@@ -4,7 +4,7 @@ class AutoFollowDefaultAccountsService < BaseService
   DEFAULT_ACCOUNTS = [
     '@meadmin@qlub.social',
     '@qlub@qlub.social',
-    '@kath@qlab.social',
+    '@kath@qlub.social',
   ].freeze
 
   def call(source_account)
