@@ -9,13 +9,13 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/accounts
-  revision: db9cb59316f7d6fdfa8f20a96b279f3b91fc4887
+  revision: de1ee8c01acfc757ee7dcb9e8b07449b23450473
   branch: qlub-accounts
   specs:
     accounts (0.1.0)
-      byebug
+      byebug (~> 11.1)
       googleauth (~> 1.13, >= 1.13.1)
-      httparty
+      httparty (~> 0.23.1)
       rails (~> 7.1.1)
 
 GIT
@@ -1009,6 +1009,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   accounts!
