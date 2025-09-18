@@ -4,7 +4,6 @@
 #
 # Table name: users
 #
-#  id                        :bigint(8)        not null, primary key
 #  email                     :string           default(""), not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
@@ -27,6 +26,7 @@
 #  last_emailed_at           :datetime
 #  otp_backup_codes          :string           is an Array
 #  account_id                :bigint(8)        not null
+#  id                        :bigint(8)        not null, primary key
 #  disabled                  :boolean          default(FALSE), not null
 #  invite_id                 :bigint(8)
 #  chosen_languages          :string           is an Array
@@ -40,6 +40,8 @@
 #  settings                  :text
 #  time_zone                 :string
 #  otp_secret                :string
+#  did_value                 :string
+#  bluesky_bridge_enabled    :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
@@ -489,7 +491,6 @@ class User < ApplicationRecord
   end
 
   def prepare_new_user!
-    auto_follow_default_accounts
     BootstrapTimelineWorker.perform_async(account_id)
     ActivityTracker.increment('activity:accounts:local')
     ActivityTracker.record('activity:logins', id)
@@ -534,10 +535,5 @@ class User < ApplicationRecord
 
   def trigger_webhooks
     TriggerWebhookWorker.perform_async('account.created', 'Account', account_id)
-  end
-
-  def auto_follow_default_accounts
-    return unless account&.local?
-    AutoFollowDefaultAccountsService.new.call(account)
   end
 end
