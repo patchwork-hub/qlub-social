@@ -10,7 +10,15 @@ class ContentSecurityPolicy
   end
 
   def media_hosts
-    [assets_host, cdn_host_value, paperclip_root_url].compact
+    [assets_host, 'https://staging-dashboard.patchwork.online/',
+     'https://dashboard.channel.org/',
+     'https://s3-eu-west-2.amazonaws.com/newsmast',
+     'https://s3-eu-west-2.amazonaws.com',
+     'https://s3-eu-west-2.amazonaws.com/newsmast/mammoth/communities/images',
+     'https://s3-eu-west-2.amazonaws.com/newsmast/cache/media_attachments/files',
+     'https://s3-eu-west-2.amazonaws.com/qlub-social',
+     cdn_host_value,
+     paperclip_root_url].compact
   end
 
   def sso_host
