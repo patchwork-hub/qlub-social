@@ -20,10 +20,11 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/content_filters
-  revision: fe612d7a195c6ee9f238254336be11fd05c487cf
+  revision: c8ceee8f30c8c0b02519e36543a824d727cfee6b
   branch: qlub-constent_filters
   specs:
     content_filters (0.1.0)
+      httparty (~> 0.23.1)
       rails (~> 7.1.1)
 
 GIT
