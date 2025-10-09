@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/accounts
-  revision: 8d74d497b141856a77e30f0d275977a17c34469a
+  revision: 2cce7489f43bd4cdf032768c7af47e9ec050b622
   branch: qlub-accounts
   specs:
     accounts (0.1.0)
