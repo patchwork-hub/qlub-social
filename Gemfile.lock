@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/posts
-  revision: eff4e79b3a715275203bae2a407d89fa0b3fc971
+  revision: f7efe68ac61fddc8006497546f247b485e2d957f
   branch: qlub-posts
   specs:
     posts (0.1.0)
