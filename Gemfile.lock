@@ -38,6 +38,14 @@ GIT
       rails (~> 7.1.1)
 
 GIT
+  remote: https://github.com/patchwork-hub/custom_feeds
+  revision: be4d94540a24baac104ebbcdae3f72aba45693be
+  branch: qlub-custom-feeds
+  specs:
+    custom_feeds (0.1.0)
+      rails (~> 7.1.1)
+
+GIT
   remote: https://github.com/patchwork-hub/posts
   revision: f7efe68ac61fddc8006497546f247b485e2d957f
   branch: qlub-posts
@@ -1036,6 +1044,7 @@ DEPENDENCIES
   content_filters!
   conversations!
   csv (~> 3.2)
+  custom_feeds!
   database_cleaner-active_record
   debug (~> 1.8)
   devise (~> 4.9)
