@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/content_filters
-  revision: b3e65a9f8bbaf21b3f98588560e6700e5fae428e
+  revision: 956f353c33bd9d46219dab712ecb0157d57780f2
   branch: qlub-constent_filters
   specs:
     content_filters (0.1.0)
@@ -38,8 +38,16 @@ GIT
       rails (~> 7.1.1)
 
 GIT
+  remote: https://github.com/patchwork-hub/custom_feeds
+  revision: be4d94540a24baac104ebbcdae3f72aba45693be
+  branch: qlub-custom-feeds
+  specs:
+    custom_feeds (0.1.0)
+      rails (~> 7.1.1)
+
+GIT
   remote: https://github.com/patchwork-hub/posts
-  revision: f7efe68ac61fddc8006497546f247b485e2d957f
+  revision: 97d9feabd412543041ef6f029cf1ea495dae7243
   branch: qlub-posts
   specs:
     posts (0.1.0)
@@ -1036,6 +1044,7 @@ DEPENDENCIES
   content_filters!
   conversations!
   csv (~> 3.2)
+  custom_feeds!
   database_cleaner-active_record
   debug (~> 1.8)
   devise (~> 4.9)
