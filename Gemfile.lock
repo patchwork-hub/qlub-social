@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/content_filters
-  revision: 956f353c33bd9d46219dab712ecb0157d57780f2
+  revision: 7bebc526e90f5f3ee459eeb8f65fd2be1f3681e1
   branch: qlub-constent_filters
   specs:
     content_filters (0.1.0)
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/patchwork-hub/posts
-  revision: 4bbc901e41a5c73f9b9186c530d5177e4dd7b37d
+  revision: 25752ec2b34936271bbe48e57992111f2199741b
   branch: qlub-posts
   specs:
     posts (0.1.0)
