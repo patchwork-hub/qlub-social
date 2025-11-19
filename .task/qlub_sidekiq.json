@@ -1,14 +1,15 @@
 {
     "compatibilities": [
         "EC2",
-        "FARGATE"
+        "FARGATE",
+        "MANAGED_INSTANCES"
     ],
     "containerDefinitions": [
         {
             "command": [
                 "bash",
                 "-c",
-                "bundle exec sidekiq"
+                "aws s3 cp s3://patchwork-private-env/qlub-fac62-firebase-adminsdk-fbsvc-a8213164f4.json /opt/mastodon/config && bundle exec sidekiq"
             ],
             "cpu": 0,
             "environment": [],
@@ -27,8 +28,7 @@
                     "awslogs-create-group": "true",
                     "awslogs-region": "eu-west-2",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             },
             "mountPoints": [],
             "name": "qlub-sidekiq",
@@ -44,7 +44,7 @@
     "memory": "1024",
     "networkMode": "awsvpc",
     "placementConstraints": [],
-    "registeredAt": "2025-09-11T08:38:49.847Z",
+    "registeredAt": "2025-11-19T10:41:07.730Z",
     "registeredBy": "arn:aws:iam::672691776916:user/ahn",
     "requiresAttributes": [
         {
@@ -84,13 +84,13 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "revision": 2,
+    "revision": 33,
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
     "status": "ACTIVE",
-    "taskDefinitionArn": "arn:aws:ecs:eu-west-2:672691776916:task-definition/qlub-sidekiq:2",
+    "taskDefinitionArn": "arn:aws:ecs:eu-west-2:672691776916:task-definition/qlub-sidekiq:33",
     "taskRoleArn": "arn:aws:iam::672691776916:role/patchwork-ecs-task-role",
     "volumes": [],
     "tags": []

@@ -1,6 +1,7 @@
 {
     "compatibilities": [
         "EC2",
+        "MANAGED_INSTANCES",
         "FARGATE"
     ],
     "containerDefinitions": [
@@ -8,7 +9,7 @@
             "command": [
                 "bash",
                 "-c",
-                "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails s -p 3000"
+                "aws s3 cp s3://patchwork-private-env/qlub-fac62-firebase-adminsdk-fbsvc-a8213164f4.json /opt/mastodon/config && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails s -p 3000"
             ],
             "cpu": 0,
             "environment": [],
@@ -93,7 +94,7 @@
     "memory": "1024",
     "networkMode": "awsvpc",
     "placementConstraints": [],
-    "registeredAt": "2025-09-11T08:14:52.869Z",
+    "registeredAt": "2025-11-19T10:40:19.321Z",
     "registeredBy": "arn:aws:iam::672691776916:user/ahn",
     "requiresAttributes": [
         {
@@ -133,13 +134,13 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "revision": 1,
+    "revision": 32,
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
     "status": "ACTIVE",
-    "taskDefinitionArn": "arn:aws:ecs:eu-west-2:672691776916:task-definition/qlub-web:1",
+    "taskDefinitionArn": "arn:aws:ecs:eu-west-2:672691776916:task-definition/qlub-web:32",
     "taskRoleArn": "arn:aws:iam::672691776916:role/patchwork-ecs-task-role",
     "volumes": [],
     "tags": []
