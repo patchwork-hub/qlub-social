@@ -113,6 +113,7 @@ RUN \
     tini \
     tzdata \
     wget \
+    unzip \
   ; \
 # Patch Ruby to use jemalloc
   patchelf --add-needed libjemalloc.so.2 /usr/local/bin/ruby; \
