@@ -232,7 +232,7 @@ gem 'conversations', git: 'https://github.com/patchwork-hub/conversations', bran
 gem 'posts', git: 'https://github.com/patchwork-hub/posts', branch: 'post-main'
 
 # *** Add this alongside Post Gems ***
-gem 'faraday-typhoeus', '~> 1.1'
+# gem 'faraday-typhoeus', '~> 1.1'
 
 # gem 'accounts', path: '/Users/macbookpro/workplace/patchwork/accounts'
 # gem 'posts', path: '/Users/macbookpro/workplace/patchwork/posts'
