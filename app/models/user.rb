@@ -40,8 +40,6 @@
 #  settings                  :text
 #  time_zone                 :string
 #  otp_secret                :string
-#  did_value                 :string
-#  bluesky_bridge_enabled    :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord

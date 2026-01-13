@@ -51,7 +51,6 @@
 #  requested_review_at           :datetime
 #  indexable                     :boolean          default(FALSE), not null
 #  attribution_domains           :string           default([]), is an Array
-#  is_banned                     :boolean          default(FALSE)
 #
 
 class Account < ApplicationRecord

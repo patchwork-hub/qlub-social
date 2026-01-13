@@ -227,7 +227,7 @@ gem 'hcaptcha', '~> 7.1'
 
 gem 'mail', '~> 2.8'
 
-gem 'accounts', git: 'https://github.com/patchwork-hub/accounts', branch: 'main'
+gem 'accounts', git: 'https://github.com/patchwork-hub/accounts', branch: 'feat-4.4.5'
 gem 'conversations', git: 'https://github.com/patchwork-hub/conversations', branch: 'main'
 gem 'posts', git: 'https://github.com/patchwork-hub/posts', branch: 'main'
 
